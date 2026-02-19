@@ -1,0 +1,41 @@
+22AIE112- 22AIE115 PROJECT GUIDELINE
+
+1. Outcomes Expected: 
+a. A project within the scope of the course 22AIE112 DSA1, focusing on the design, implementation, analysis, and application of data structures to solve real-world or engineering problems. Projects should preferably include implementation and comparison of multiple data structures, demonstrating their suitability for different problem scenarios. Respectively, the project within the scope of the course 22AIE115 UID, thus preferably oriented towards designing and developing user-friendly web interfaces using HTML, CSS, and JavaScript.
+
+b. Offline webpage(s). The contents of the webpage(s) must contain (but not be limited to):
+i. Introduction and motivation behind the project.
+ii. Problem statement and real-world relevance.
+iii. Novelty or advanced implementation aspects of the project.
+iv. Methodology used, including:
+1. Choice of data structures
+2. Algorithm design
+3. Complexity analysis (Time & Space)
+4. Comparison among alternative data structures
+5. Software implementation demonstrating the working of the solution.
+6. Results and performance analysis
+7. HTML , CSS, Java scripts 
+v. References 
+vi. Contributors
+
+c. Note: Students may host the webpage using GitHub Pages or maintain it offline.
+
+2. GitHub repository, containing:
+a. Source code (python, HTML,CSS, Java scripts) 
+b. Documentation
+c. Test cases
+d. Demonstration instructions
+e. The repository link must be included in the project webpage.
+
+3. Make sure that you have a concrete backing of literature, executability, and other groundwork while proposing something out of the syllabus. It is discouraged to shift the project topic later.
+
+Instructions While Choosing the Project Topic:
+1. As far as possible, no two groups should choose the same project. If two groups have chosen the same project, there should be a significant difference in methods and outcomes . 
+2. The webpage(s), GitHub repository, need to be submitted before final review. 
+3. An excel sheet and MS forms (both mandatory even though the info is similar) need to be filled out to record your preference of the project topic. - will be notified in a later date.
+
+Tentative Timeline:
+1. Choosing the project topic – 6th January 2026, 11.00 pm.
+2. Zeroth Review – Feedback through MS Forms – 7th January 2026.
+3. Mid Review (exact date to be published by Exam Cell) - 1st week of March.
+4. Final Review (exact date to be published by Exam Cell) - 1st week of May.
