@@ -1,0 +1,61 @@
+:root{
+  --bg:#ffffff;
+  --panel:#f8f9fa;
+  --muted:#666666;
+  --accent:#ff2b56;
+}
+@font-face {
+    font-family: "Vipnagorgialla";
+    src: url("/static/assets/fonts/vipnagorgialla/Vipnagorgialla Rg.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "MTV Lowercase 1";
+    src: url("/static/assets/fonts/mtv-lowercase-1-regular-font/mtv-lowercase-1.ttf") format("truetype");
+}
+
+*{box-sizing:border-box; font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif; font-weight: 300;}
+html,body{height:100%;margin:0;font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif; font-weight: 300;}
+body{background:var(--bg);color:#111111}
+.topbar{height:56px;background:#ffffff;display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid rgba(0,0,0,0.05)}
+.brand{font-weight:normal;color:var(--accent)}
+.top-actions{display:flex;gap:12px;align-items:center}
+.top-actions .search{padding:8px 12px;border-radius:6px;border:1px solid #f0f0f0;background:#ffffff;color:#111}
+.top-actions .submit{background:var(--accent);border:0;padding:8px 12px;border-radius:8px;color:#fff;cursor:pointer}
+
+.cover{position:relative;min-height:220px;background:linear-gradient(180deg, rgba(255,255,255,0.1), rgba(0,0,0,0.05));overflow:hidden}
+.cover-pattern{position:absolute;inset:0;background-image:repeating-linear-gradient(135deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 40px);filter:brightness(1.0)}
+.cover-actions{position:absolute;right:28px;top:28px}
+.cover-btn{background:#5b4bd6;color:#fff;padding:8px 14px;border-radius:24px;cursor:pointer}
+.cover-btn input{display:none}
+
+.profile-row{position:relative;display:flex;gap:18px;align-items:center;padding:36px 48px}
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.avatar{width:118px;height:118px;border-radius:16px;background:linear-gradient(135deg,#7b61ff,#6ee7c7);display:flex;align-items:center;justify-content:center;font-weight:normal;font-size:28px;color:#081;box-shadow:0 6px 18px rgba(0,0,0,0.1)}
+.avatar-btn{font-size:12px;color:var(--muted);background:transparent;border:1px dashed rgba(255,255,255,0.04);padding:6px 8px;border-radius:8px;cursor:pointer}
+.avatar-btn input{display:none}
+.user-meta{display:flex;flex-direction:column}
+.username{margin:0;font-size:34px}
+.substats{color:var(--muted);margin-top:6px}
+.spacer{flex:1}
+.profile-cta .follow{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);padding:10px 14px;border-radius:8px}
+
+.profile-nav{display:flex;gap:18px;padding:12px 48px;background:#f8f9fa;border-top:1px solid rgba(0,0,0,0.05)}
+.profile-nav a{color:var(--muted);cursor:pointer}
+.profile-nav a.active{color:var(--accent);border-bottom:3px solid var(--accent);padding-bottom:8px}
+
+.container{display:flex;gap:28px;padding:28px 48px}
+.left{flex:2}
+.right{flex:1}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:12px}
+.card{height:160px;background:#ffffff;border:1px solid #f0f0f0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:var(--muted);box-shadow:0 10px 30px rgba(0,0,0,0.05)}
+.about-box{background:var(--panel);padding:16px;border-radius:8px}
+.about-list{list-style:none;padding:0;margin:8px 0;color:var(--muted)}
+.pronouns{color:var(--muted);margin-top:12px}
+
+/* Responsive */
+@media (max-width:840px){
+  .container{flex-direction:column;padding:18px}
+  .gallery-grid{grid-template-columns:1fr}
+  .profile-row{padding:18px}
+}

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>meed Artmash</title>
+<link rel="icon" href="/Assets/favicon.png" type="image/png">
+<link rel="stylesheet" href="meed.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+<style>
+    .explorefullcontex {
+        transition: margin-left 0.3s ease, width 0.3s ease;
+    }
+
+    .sidebar[data-visible="false"] ~ .explorefullcontex {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .sidebar[data-visible="true"] ~ .explorefullcontex {
+        margin-left: 245px;
+        width: calc(100% - 245px);
+    }
+</style>
+</head>
+<body>
+    <header style="position: fixed; top: 0; left: 0; width: 100%; height: 70px; background-color: white; display: flex; align-items: center; padding: 0 20px; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); z-index: 1000;">
+        <button id="btnNew">
+            <img id="newButtonImage" src="https://icon-library.com/images/hamburger-menu-icon-svg/hamburger-menu-icon-svg-15.jpg" alt="New Button">
+        </button>
+        <button id="btnHeaderHome">
+            <img id="headerHomeImage" src="https://www.androidheadlines.com/wp-content/uploads/2022/11/Deviantart-logo-1420x799.webp" alt="Header Home">
+        </button>
+    </header>
+    <div class="mainfull" style="margin-top: 60px; position: relative;">
+        <div class="leftsidetab sidebar" data-visible="false" style="position: fixed; top: 60px; left: 0; width: 245px; height: calc(100% - 60px); margin: 0; display: flex; flex-direction: column; justify-content: space-evenly;">
+            <div id="sidebar-buttonssection" style="display: flex; flex-direction: column; gap: 10px;">
+                <button id="btnHome"><img id="sidebat_btns" src="https://raw.githubusercontent.com/thianeshwarr/id/main/icons/Untitled%20(6)%20(1).png"><h3>Home</h3></button>
+                <button id="btnExplore"><img id="sidebat_btns" src="https://raw.githubusercontent.com/omavcher/Instagram-clone/main/Instagram%20Clone/Assets/Explore.png"><h3>Explore</h3></button>
+                <button id="btnMessages"><img id="sidebat_btns" src="https://raw.githubusercontent.com/thianeshwarr/id/main/icons/Untitled%20(7)%20(1).png"><h3>Messages</h3></button>
+                <button id="btnCreate"><img id="sidebat_btns" src="https://raw.githubusercontent.com/thianeshwarr/id/main/icons/Untitled%20(10)%20(1).png"><h3>Create</h3></button>       
+                <button id="profileDpbtns"><img class="profileDp" id="profileDp" src="https://raw.githubusercontent.com/thianeshwarr/id/refs/heads/main/IMG_20250317_022116_769.webp"><h3>Profile</h3></button>
+            </div>
+        </div>  
+        <div class="explorefullcontex">
+            <div class="explore-full-box">
+                <div id="postwithreelrow"></div>
+                <div id="postwithreelrowrev"></div>
+                <div id="postwithreelrow2"></div>
+                <div id="postwithreelrowrev2"></div>
+                <div id="postwithreelrow3"></div>
+                <div id="postwithreelrowrev3"></div>
+                <div id="postwithreelrow4"></div>
+                <div id="postwithreelrowrev4"></div>
+                <div id="postwithreelrow5"></div>
+                <div id="postwithreelrowrev5"></div>
+                <footer>
+                    <div class="footer-atags">
+                        <a href="#">Meta</a>        
+                        <a href="#">About</a>
+                        <a href="#">Blog</a>
+                        <a href="#">Jobs</a>
+                        <a href="#">Help</a>
+                        <a href="#">API</a>
+                        <a href="#">Privacy</a>
+                        <a href="#">Terms</a>
+                        <a href="#">Locations</a>
+                        <a href="#">Instagram Lite</a>
+                        <a href="#">Thrends</a>
+                        <a href="#">Contant uploding and non-users</a>
+                        <a href="#">Meta Verified</a>
+                    </div>
+                    <div class="footer-ending">
+                        <p>© 2024 Instagram from Meta</p>
+                    </div>
+                </footer>
+            </div>
+        </div>
+    </div>
+<script src="meed.js"></script>
+<script>
+    const btnNew = document.getElementById('btnNew');
+    const sidebar = document.querySelector('.leftsidetab');
+    const exploreContext = document.querySelector('.explorefullcontex');
+
+    btnNew.addEventListener('click', () => {
+        const isVisible = sidebar.getAttribute('data-visible') === 'true';
+        sidebar.setAttribute('data-visible', !isVisible);
+    });
+</script>
+</body>
+</html>

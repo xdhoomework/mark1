@@ -1,0 +1,246 @@
+@font-face {
+    font-family: "Vipnagorgialla";
+    src: url("/static/assets/fonts/vipnagorgialla/Vipnagorgialla Rg.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "MTV Lowercase 1";
+    src: url("/static/assets/fonts/mtv-lowercase-1-regular-font/mtv-lowercase-1.ttf") format("truetype");
+}
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif;
+font-weight: 300;
+}
+
+.background-panel{
+    position:relative;
+    height:100vh;
+    background-color: #ffffff;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.overlay{
+
+text-align:center;
+background:rgba(0,0,0,0.35);
+padding:20px 50px 50px 50px; /* more bottom padding */
+border-radius:10px;
+width:100%;
+height: 600px;
+display:flex;
+flex-direction:column;
+justify-content:flex-end; /* push to bottom */
+align-items:center;
+background-image:url("https://preview.redd.it/iron-man-concept-art-marvel-rivals-art-vision-vol-02-v0-2hnrhj7gfe1f1.png?width=640&crop=smart&auto=webp&s=4c3376e4cbd481c2002609cff0505e657ffa5b3f");
+background-size:cover;
+background-position:center;
+}
+
+.overlay.dark{
+
+background: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)), url("https://preview.redd.it/iron-man-concept-art-marvel-rivals-art-vision-vol-02-v0-2hnrhj7gfe1f1.png?width=640&crop=smart&auto=webp&s=4c3376e4cbd481c2002609cff0505e657ffa5b3f");
+background-size: cover;
+background-position: center;
+
+}
+
+.buttons button{
+
+display:block;
+width:180px;
+margin:15px auto;
+padding:12px;
+
+font-size:18px;
+border:none;
+
+background:#ff2b56;
+color:white;
+
+cursor:pointer;
+
+border-radius:4px;
+
+transition:0.3s;
+font-family: "MTV Lowercase 1", sans-serif;
+text-transform: uppercase;
+
+}
+
+.buttons button:hover{
+
+background:#ff5a7c;
+
+}
+
+.login-btn{
+width:140px !important;
+
+}
+
+.modal{
+
+display:none;
+
+position:fixed;
+
+top:50%;
+left:50%;
+
+transform:translate(-50%,-50%);
+
+z-index:1000;
+
+text-align:center;
+
+}
+
+/* login box */
+
+.login-box{
+    background:#ffffff;
+    padding:40px;
+    width:400px;
+    border-radius:12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
+
+#user-pass-input{
+
+display:flex;
+flex-direction:column;
+gap:10px;
+
+
+}
+
+.login-box input{
+
+padding:10px;
+
+border:1px solid #ccc;
+border-radius:4px;
+
+margin:1.5px 0;
+font-family: "Vipnagorgialla", sans-serif;
+
+width:90%;
+
+}
+
+.login-btn{
+
+background:#ff2b56;
+
+border:1px solid transparent;
+
+padding:10px;
+
+font-family: "Vipnagorgialla", sans-serif;
+
+color:white;
+
+cursor:pointer;
+
+border-radius:4px;
+
+margin:10px 0;
+
+
+}
+
+.login-btn2{
+
+background:#ff2b56;
+
+border:none;
+
+padding:12px;
+
+color:white;
+
+cursor:pointer;
+
+border-radius:3px;
+
+font-family: "Vipnagorgialla", sans-serif;
+width: 90%;
+
+}
+
+.close{
+
+align-self:flex-end;
+cursor:pointer;
+font-size:20px;
+
+}
+
+
+.passwordincorrect{
+
+text-align:center;
+color:#ff5a7c;
+font-size: smaller;
+width:100%;
+}
+
+.orsec{
+
+display:flex;
+align-items:center;
+gap:10px;
+width:90%;
+justify-content:center;
+margin:0 auto;
+
+}
+
+
+
+#or-line{
+
+flex:1;
+height:1.9px;
+background:#ccc;
+
+}
+
+.dontaccount{
+
+text-align:center;
+display:flex;
+flex-direction:column;
+
+align-items:center;
+
+}
+
+#createaccount-button{
+
+background:#ff2b56;
+
+border:none;
+
+padding:12px;
+
+color:white;
+
+cursor:pointer;
+
+font-family: "Vipnagorgialla", sans-serif;
+border-radius:3px;
+
+
+width:90%;
+
+}

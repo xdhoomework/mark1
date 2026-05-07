@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forums - Artmash Community</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Homepage.css') }}">
+    <style>
+        body { background: #ffffff; color: #111111; font-family: 'Vipnagorgialla', sans-serif; font-weight: 300; }
+        .forum-container { max-width: 1200px; margin: 40px auto; padding: 0 20px; display: flex; gap: 30px; padding-bottom: 80px; }
+        .forum-main { flex: 3; }
+        .forum-sidebar { flex: 1; }
+        
+        .category-tabs { display: flex; gap: 10px; margin-bottom: 25px; overflow-x: auto; padding-bottom: 10px; }
+        .cat-tab { padding: 10px 20px; background: #ffffff; border: 1px solid #f0f0f0; border-radius: 20px; text-decoration: none; color: #111; font-weight: 300; white-space: nowrap; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .cat-tab.active { background: #ff2b56; color: white; border-color: #ff2b56; }
+        .cat-tab:hover:not(.active) { border-color: #ff2b56; color: #ff2b56; }
+
+        .thread-card { background: #ffffff; padding: 20px; border-radius: 12px; margin-bottom: 15px; display: flex; gap: 20px; border: 1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); transition: transform 0.2s, border-color 0.2s; text-decoration: none; color: inherit; }
+        .thread-card:hover { transform: translateY(-3px); border-color: #ff2b56; }
+        .vote-section { display: flex; flex-direction: column; align-items: center; gap: 5px; color: #666; border-right: 1px solid #f0f0f0; padding-right: 20px; }
+        .thread-content { flex: 1; }
+        .thread-meta { font-size: 0.85rem; color: #666; margin-bottom: 5px; }
+        .thread-title { font-size: 1.25rem; font-weight: 300; color: #ff2b56; margin-bottom: 8px; }
+        .thread-excerpt { color: #666; line-height: 1.5; font-size: 0.95rem; }
+
+        .create-thread-card { background: #ffffff; padding: 25px; border-radius: 12px; margin-bottom: 30px; border: 1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .create-thread-card h3 { color: #ff2b56; font-family: 'Russo One', sans-serif; margin-bottom: 20px; font-weight: 300; }
+        .form-input { width: 100%; padding: 12px; border: 1px solid #f0f0f0; background: #f8f9fa; color: #111; border-radius: 8px; margin-bottom: 15px; font-family: 'Vipnagorgialla', sans-serif; outline: none; }
+        .form-input:focus { border-color: #ff2b56; }
+        .btn-post { background: #ff2b56; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-weight: 300; cursor: pointer; transition: 0.3s; }
+        .btn-post:hover { background: #ff5a7c; transform: translateY(-2px); }
+
+        .sidebar-card { background: #ffffff; padding: 20px; border-radius: 12px; border: 1px solid #f0f0f0; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .sidebar-card h3 { border-bottom: 2px solid #ff2b56; padding-bottom: 10px; margin-bottom: 15px; font-size: 1.1rem; color: #111; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <div style="background: #ffffff; padding: 15px 50px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f0f0;">
+        <a href="/" class="logo" style="font-size: 1.8rem; color: #ff2b56; text-decoration: none; font-weight: 300; text-transform: uppercase;">ARTMASH FORUMS</a>
+        <div style="display: flex; gap: 20px; align-items: center;">
+            <a href="/feed" style="color: #111; text-decoration: none; font-weight: 300; opacity: 0.8; transition: 0.3s;">Back to Gallery</a>
+            <span style="font-weight: 300; color: #ff2b56;">{{ user }}</span>
+        </div>
+    </div>
+
+    <div class="forum-container">
+        <div class="forum-main">
+            <div class="category-tabs">
+                <a href="/forums" class="cat-tab {% if not current_category %}active{% endif %}">All Discussions</a>
+                {% for cat in ["Art Showcase", "Technical Help", "Commissions", "Lounge"] %}
+                <a href="/forums/{{ cat }}" class="cat-tab {% if current_category == cat %}active{% endif %}">{{ cat }}</a>
+                {% endfor %}
+            </div>
+
+            <div class="create-thread-card">
+                <h3>Start a Conversation</h3>
+                <form action="/forums/create" method="POST">
+                    <input type="text" name="title" class="form-input" placeholder="Title of your discussion..." required>
+                    <select name="category" class="form-input" required>
+                        <option value="Art Showcase">Art Showcase</option>
+                        <option value="Technical Help">Technical Help</option>
+                        <option value="Commissions">Commissions</option>
+                        <option value="Lounge">Lounge</option>
+                    </select>
+                    <textarea name="content" class="form-input" placeholder="What's on your mind? (Supports Reddit-style long form)" style="height: 100px;" required></textarea>
+                    <button type="submit" class="btn-post">Post Discussion</button>
+                </form>
+            </div>
+
+            {% for thread in threads %}
+            <a href="/forums/thread/{{ thread.id }}" class="thread-card">
+                <div class="vote-section">
+                    <i class="fa-solid fa-chevron-up"></i>
+                    <span style="font-weight: 300; color: #111;">{{ thread.votes }}</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </div>
+                <div class="thread-content">
+                    <div class="thread-meta">
+                        <span style="background: #ff2b56; color: #fff; padding: 2px 8px; border-radius: 4px; font-weight: 300; margin-right: 10px;">{{ thread.category }}</span>
+                        Posted by <b style="color: #111;">@{{ thread.username }}</b>
+                    </div>
+                    <div class="thread-title">{{ thread.title }}</div>
+                    <div class="thread-excerpt">{{ thread.content[:150] }}{% if thread.content|length > 150 %}...{% endif %}</div>
+                    <div style="margin-top: 10px; font-size: 0.85rem; color: #666;">
+                        <i class="fa-solid fa-comment"></i> {{ thread.replies|length }} comments
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+
+        <div class="forum-sidebar">
+            <div class="sidebar-card">
+                <h3>Community Rules</h3>
+                <ul style="font-size: 0.9rem; color: #666; line-height: 1.6; padding-left: 20px;">
+                    <li>Be respectful to fellow artists.</li>
+                    <li>No plagiarism or unauthorized sales.</li>
+                    <li>Use appropriate tags for NSFW content.</li>
+                </ul>
+            </div>
+            <div class="sidebar-card">
+                <h3>Forum Stats</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px; color: #ccc;">
+                    <div><b>Threads:</b> <span style="color: #ff2b56;">{{ threads|length }}</span></div>
+                    <div><b>Active Members:</b> <span style="color: #ff2b56;">1</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Bottom Navigation Bar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tiktok_style.css') }}">
+    <div class="bottom-nav">
+        <a href="/feed" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="/explore" class="nav-item">
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="/search" class="nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="/forums" class="nav-item active">
+            <i class="fa-solid fa-comments"></i>
+            <span>Community</span>
+        </a>
+        <a href="/profile/{{ user }}" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html>

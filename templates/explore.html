@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore - Artmash</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='meed_style.css') }}?v=1.0">
+</head>
+<body>
+    <header>
+        <button id="btnNew">
+            <svg width="35" height="28" viewBox="0 0 100 80" id="newButtonIcon">
+                <rect width="100" height="15" fill="white" />
+                <rect y="32" width="100" height="15" fill="white" />
+                <rect y="64" width="100" height="15" fill="white" />
+            </svg>
+        </button>
+        <a href="/" class="logo" style="text-transform: uppercase; font-weight: 300;">ARTMASH</a>
+    </header>
+
+    <div class="main-container">
+        <div class="sidebar" data-visible="false">
+            <div class="sidebar-links">
+                <a href="/feed" class="sidebar-btn"><i class="fa-solid fa-house"></i><h3>Home</h3></a>
+                <a href="/explore" class="sidebar-btn" style="background-color: #f8f9fa; color: #ff2b56;"><i class="fa-solid fa-compass"></i><h3 style="color: #ff2b56; font-weight: 300;">Explore</h3></a>
+                <a href="/upload" class="sidebar-btn"><i class="fa-solid fa-plus"></i><h3>Create</h3></a>
+                <a href="/profile/{{ user }}" class="sidebar-btn"><i class="fa-solid fa-user"></i><h3>Profile</h3></a>
+                <a href="/logout" class="sidebar-btn" style="margin-top: 20px;"><i class="fa-solid fa-right-from-bracket"></i><h3>Logout</h3></a>
+            </div>
+        </div>
+
+        <div class="content-area">
+            <div class="explore-grid">
+                {% for i in range(0, posts|length, 3) %}
+                {# Select 3 posts for this block #}
+                {% set group = posts[i:i+3] %}
+                
+                <div class="grid-row {{ 'grid-row-rev' if (i // 3) % 2 != 0 else '' }}">
+                    <div class="small-posts-grid">
+                        {% for post in group[:2] %}
+                        <div class="post-item" onclick="location.href='/post/{{ post.id }}'">
+                            <img src="{{ post.image_url }}" alt="{{ post.title }}">
+                            <div class="post-overlay">
+                                <span>
+                                    <svg width="18" height="18" viewBox="0 0 100 100" style="vertical-align: middle; margin-right: 5px;">
+                                        <path d="M50,30 L35,15 L5,15 Q0,15 0,50 L50,95 L100,50 Q100,15 95,15 L65,15 Z" fill="white" />
+                                    </svg>
+                                    {{ post.likes }}
+                                </span>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="large-post-box">
+                        {% if group|length > 2 %}
+                        {% set large_post = group[2] %}
+                        <div class="post-item" style="height: 100%;" onclick="location.href='/post/{{ large_post.id }}'">
+                            <img src="{{ large_post.image_url }}" alt="{{ large_post.title }}">
+                            <div class="post-overlay">
+                                <span>
+                                    <svg width="18" height="18" viewBox="0 0 100 100" style="vertical-align: middle; margin-right: 5px;">
+                                        <path d="M50,30 L35,15 L5,15 Q0,15 0,50 L50,95 L100,50 Q100,15 95,15 L65,15 Z" fill="white" />
+                                    </svg>
+                                    {{ large_post.likes }}
+                                </span>
+                            </div>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const btnNew = document.getElementById('btnNew');
+        const sidebar = document.querySelector('.sidebar');
+
+        btnNew.addEventListener('click', () => {
+            const isVisible = sidebar.getAttribute('data-visible') === 'true';
+            sidebar.setAttribute('data-visible', !isVisible);
+        });
+    </script>
+    <!-- Bottom Navigation Bar -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tiktok_style.css') }}">
+    </div> <!-- end main-container -->
+</body>
+</html>

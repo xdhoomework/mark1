@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ thread.title }} - Artmash Discussion</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <style>
+        body { background: #ffffff; color: #111111; font-family: 'Vipnagorgialla', sans-serif; margin: 0; padding-bottom: 80px; font-weight: 300; }
+        .thread-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        
+        .thread-header { background: #ffffff; padding: 20px 40px; border-bottom: 1px solid #f0f0f0; display: flex; align-items: center; gap: 15px; }
+        .thread-header h1 { font-size: 1.2rem; color: #ff2b56; margin: 0; font-family: 'Russo One', sans-serif; font-weight: 300; }
+        
+        .message-row { display: flex; gap: 15px; padding: 15px 20px; transition: background 0.1s; border-radius: 8px; margin-bottom: 5px; }
+        .message-row:hover { background: #f8f9fa; }
+        .avatar { width: 40px; height: 40px; background: #ff2b56; border-radius: 50%; flex-shrink: 0; }
+        .message-content { flex: 1; }
+        .user-name { font-weight: 300; color: #111; margin-right: 10px; cursor: pointer; }
+        .user-name:hover { color: #ff2b56; }
+        .timestamp { font-size: 0.75rem; color: #666; }
+        .text { color: #111; line-height: 1.5; margin-top: 5px; white-space: pre-wrap; }
+
+        .op-container { background: #ffffff; border-radius: 12px; padding: 30px; margin-bottom: 30px; border-left: 4px solid #ff2b56; border: 1px solid #f0f0f0; border-left-width: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .op-title { font-size: 1.8rem; font-weight: 300; color: #ff2b56; margin-bottom: 15px; font-family: 'Russo One', sans-serif; }
+
+        .replies-section { margin-top: 40px; border-top: 1px solid #f0f0f0; padding-top: 30px; }
+        .reply-count { font-weight: 300; margin-bottom: 20px; color: #111; display: flex; align-items: center; gap: 10px; }
+
+        .interaction-bar { display: flex; gap: 20px; margin-top: 15px; font-size: 0.9rem; color: #888; }
+        .inter-btn { cursor: pointer; display: flex; align-items: center; gap: 5px; transition: 0.2s; }
+        .inter-btn:hover { color: #ff2b56; }
+
+        .input-area { position: fixed; bottom: 80px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 960px; background: #f8f9fa; padding: 10px 20px; border-radius: 8px; display: flex; align-items: center; gap: 15px; border: 1px solid #f0f0f0; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .input-area input { flex: 1; background: transparent; border: none; color: #111; padding: 10px; outline: none; font-family: 'Vipnagorgialla', sans-serif; font-weight: 300; }
+    </style>
+</head>
+<body>
+    <div class="thread-header">
+        <a href="/forums" style="color: #666; text-decoration: none; font-weight: 300; transition: 0.3s;"><i class="fa-solid fa-chevron-left"></i> Back to Forums</a>
+        <div style="width: 1px; height: 20px; background: #f0f0f0;"></div>
+        <h1><i class="fa-solid fa-hashtag" style="color: #ff2b56;"></i> {{ thread.category }}</h1>
+    </div>
+
+    <div class="thread-container">
+        <div class="op-container">
+            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                <div class="avatar" style="background: #ff2b56;"></div>
+                <div>
+                    <div class="user-name">{{ thread.username }}</div>
+                    <div class="timestamp">Posted on {{ thread.timestamp | int }}</div>
+                </div>
+            </div>
+            <div class="op-title">{{ thread.title }}</div>
+            <div class="text" style="font-size: 1.1rem;">{{ thread.content }}</div>
+            
+            <div class="interaction-bar">
+                <div class="inter-btn" onclick="location.href='/forums/vote/{{ thread.id }}'"><i class="fa-solid fa-up-long"></i> {{ thread.votes }} Votes</div>
+                <div class="inter-btn"><i class="fa-solid fa-comment"></i> {{ thread.replies|length }} Replies</div>
+                <div class="inter-btn"><i class="fa-solid fa-share-nodes"></i> Share</div>
+            </div>
+        </div>
+
+        <div class="replies-section">
+            <div class="reply-count"><i class="fa-solid fa-comments"></i> DISCUSSIONS ({{ thread.replies|length }})</div>
+            
+            {% for reply in thread.replies %}
+            <div class="message-row">
+                <div class="avatar" style="background: #4e5058;"></div>
+                <div class="message-content">
+                    <div>
+                        <span class="user-name">{{ reply.username }}</span>
+                        <span class="timestamp">{{ reply.timestamp | int }}</span>
+                    </div>
+                    <div class="text">{{ reply.content }}</div>
+                    <div class="interaction-bar">
+                        <div class="inter-btn"><i class="fa-solid fa-heart"></i> {{ reply.votes }}</div>
+                        <div class="inter-btn">Reply</div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% if not thread.replies %}
+            <div style="text-align: center; color: #80848e; margin-top: 50px;">
+                <i class="fa-solid fa-ghost" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                <p>No messages yet. Start the conversation!</p>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <form class="input-area" action="/forums/reply" method="POST">
+        <input type="hidden" name="thread_id" value="{{ thread.id }}">
+        <i class="fa-solid fa-circle-plus" style="color: #666; font-size: 1.2rem; cursor: pointer;"></i>
+        <input type="text" name="content" placeholder="Message #{{ thread.title[:20] }}..." required>
+        <button type="submit" style="background: none; border: none; color: #ff2b56; font-weight: 300; cursor: pointer;">SEND</button>
+    </form>
+
+    <!-- Bottom Navigation Bar (Matching Artmash) -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='tiktok_style.css') }}">
+    <div class="bottom-nav">
+        <a href="/feed" class="nav-item">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="/explore" class="nav-item">
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="/search" class="nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="/forums" class="nav-item active">
+            <i class="fa-solid fa-comments"></i>
+            <span>Community</span>
+        </a>
+        <a href="/profile/{{ user }}" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Artmash</title>
+    <link href="https://fonts.googleapis.com/css2?family=Russo+One&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Homepage.css') }}?v=1.0">
+    <style>
+        @font-face {
+            font-family: "Vipnagorgialla";
+            src: url("/static/assets/fonts/vipnagorgialla/Vipnagorgialla Rg.otf") format("truetype");
+        }
+        @font-face {
+            font-family: "MTV Lowercase 1";
+            src: url("/static/assets/fonts/mtv-lowercase-1-regular-font/mtv-lowercase-1.ttf") format("truetype");
+        }
+        body {
+            background: #ffffff;
+            color: #111111;
+            font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif;
+            margin: 0;
+            padding: 0;
+            font-weight: 300;
+        }
+        nav {
+            background: #111111;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #222;
+        }
+        html, body {
+            overflow: visible !important;
+            height: auto !important;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60px;
+            background-color: #111111;
+            border-top: 1px solid #222;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 2000;
+        }
+        .nav-item {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-size: 0.7rem;
+            gap: 4px;
+            transition: 0.2s;
+        }
+        .logo {
+            font-family: 'MTV Lowercase 1', 'Russo One', sans-serif;
+            font-size: 1.8rem;
+            color: #ff2b56;
+            text-decoration: none;
+            font-weight: 300;
+            text-transform: uppercase;
+        }
+        .nav-links a {
+            color: #ffffff;
+            text-decoration: none;
+            margin-left: 30px;
+            font-weight: 300;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        .nav-links a:hover {
+            opacity: 1;
+            color: #ff2b56;
+        }
+        .upload-btn {
+            background: #ff2b56;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff !important;
+            opacity: 1 !important;
+        }
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 350px;
+            gap: 40px;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            padding-bottom: 80px;
+            overflow: visible !important;
+        }
+        .feed {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+        .post {
+            background: #111111;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #222;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+        }
+        .post-header {
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid #222;
+        }
+        .avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .post-header b {
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+        .post-image {
+            width: 100%;
+            display: block;
+        }
+        .post-content {
+            padding: 20px;
+        }
+        .post-title {
+            font-size: 1.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #ff2b56;
+        }
+        .post-desc {
+            font-size: 0.9rem;
+            color: #999;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        .post-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid #222;
+            padding-top: 15px;
+        }
+        .like-btn, .comment-toggle {
+            background: transparent;
+            border: 1px solid #ff2b56;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #ff2b56;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            transition: 0.2s;
+            font-family: 'MTV Lowercase 1', sans-serif;
+        }
+        .like-btn:hover, .comment-toggle:hover, .like-btn.liked {
+            background: #ff2b56;
+            color: white;
+        }
+        .like-btn:hover svg path, .like-btn.liked svg path {
+            fill: white;
+        }
+        .comment-toggle:hover svg path, .comment-toggle:hover svg rect {
+            fill: white;
+        }
+        .comments-section {
+            padding: 15px 0;
+            border-top: 1px solid #222;
+            margin-top: 15px;
+            display: none;
+        }
+        .comment-list {
+            max-height: 200px;
+            overflow-y: auto;
+            margin-bottom: 15px;
+        }
+        .comment-item {
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            color: #999;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .comment-avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            object-fit: cover;
+            border: 1px solid #ff2b56;
+        }
+        .comment-item b {
+            color: #ff2b56;
+            margin-right: 2px;
+        }
+        .comment-input-group {
+            display: flex;
+            gap: 10px;
+        }
+        .comment-input {
+            flex: 1;
+            background: #222;
+            border: 1px solid #333;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            outline: none;
+            font-family: 'Vipnagorgialla', sans-serif;
+        }
+        .comment-submit {
+            background: #ff2b56;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+        .sidebar {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 100px;
+            height: fit-content !important;
+            align-self: start !important;
+            z-index: 100;
+        }
+        .trending-card {
+            background: #111111;
+            border-radius: 12px;
+            padding: 25px;
+            border: 1px solid #222;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            color: #ffffff;
+        }
+        .trending-card h2 {
+            font-family: 'MTV Lowercase 1', 'Russo One', sans-serif;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #ff2b56;
+        }
+        .trending-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #999;
+        }
+        .trending-item:hover b {
+            color: #ff2b56;
+        }
+        .trending-thumb {
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            object-fit: cover;
+        }
+        .trending-info b {
+            display: block;
+            font-size: 0.9rem;
+            color: #ffffff;
+            transition: color 0.2s;
+        }
+        .trending-info span {
+            font-size: 0.75rem;
+            color: #999;
+        }
+        .sort-bar {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        .sort-btn {
+            background: #f8f9fa;
+            border: 1px solid #f0f0f0;
+            padding: 8px 15px;
+            border-radius: 5px;
+            color: #111;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 300;
+            transition: 0.2s;
+        }
+        .sort-btn:hover {
+            border-color: #ff2b56;
+        }
+        .sort-btn.active {
+            background: #ff2b56;
+            color: white;
+            border-color: #ff2b56;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/" class="logo">ARTMASH</a>
+        <div class="nav-links">
+            <a href="/feed">Feed</a>
+            <a href="/explore">Explore</a>
+            <a href="/profile/{{ user }}">Profile</a>
+            <a href="/upload" class="upload-btn">+ Upload</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="main-content">
+        <div class="feed-section">
+            <div class="sort-bar">
+                <a href="/feed?sort=newest" class="sort-btn active">Newest</a>
+                <a href="/feed?sort=popularity" class="sort-btn">Popular</a>
+                <a href="/feed?shuffle=true" class="sort-btn">Shuffle</a>
+            </div>
+
+            <div class="feed">
+                {% for post in posts %}
+                <div class="post">
+                    <div class="post-header">
+                        {% if post.profile_pic %}
+                        <img src="{{ post.profile_pic }}" class="avatar">
+                        {% else %}
+                        <img src="https://ui-avatars.com/api/?name={{ post.username }}&background=ff2b56&color=fff" class="avatar">
+                        {% endif %}
+                        <a href="/profile/{{ post.username }}" style="color: #ffffff; text-decoration: none;"><b>{{ post.username }}</b></a>
+                    </div>
+                    <a href="/post/{{ post.id }}">
+                        <img src="{{ post.image_url }}" alt="{{ post.title }}" class="post-image">
+                    </a>
+                    <div class="post-content">
+                        <a href="/post/{{ post.id }}" style="text-decoration: none;">
+                            <div class="post-title" style="color: #ffffff;">{{ post.title }}</div>
+                        </a>
+                        <div class="post-desc">{{ post.description }}</div>
+                        <div class="post-footer">
+                            <div style="display: flex; gap: 10px;">
+                                <button class="like-btn {{ 'liked' if post.liked else '' }}" onclick="likePost(event, {{ post.id }}, this)">
+                                    <svg width="22" height="22" viewBox="0 0 100 100" style="vertical-align: middle; margin-right: 5px;">
+                                        <path d="M50,30 L35,15 L5,15 Q0,15 0,50 L50,95 L100,50 Q100,15 95,15 L65,15 Z"
+                                              fill="#ff2b56" />
+                                    </svg>
+                                    <span class="like-count">{{ post.likes }}</span>
+                                </button>
+                                <button class="comment-toggle" onclick="toggleComments({{ post.id }})">
+                                    <svg width="22" height="22" viewBox="0 0 100 85" style="vertical-align: middle; margin-right: 5px;">
+                                        <path d="M3,0 H97 Q100,0 100,3 V57 Q100,60 97,60 H38 L5,85 L12,60 H3 Q0,60 0,57 V3 Q0,0 3,0 Z"
+                                              fill="#ff2b56" />
+                                    </svg>
+                                    <span class="comment-count">{{ post.comments|length }}</span>
+                                </button>
+                            </div>
+                            <div class="tags">
+                                {% for tag in post.tags %}
+                                <span style="font-size: 0.8rem; color: #999; margin-left: 10px;">#{{ tag }}</span>
+                                {% endfor %}
+                            </div>
+                        </div>
+                        
+                        <div id="comments-{{ post.id }}" class="comments-section">
+                            <div class="comment-list">
+                                {% for comment in post.comments %}
+                                <div class="comment-item">
+                                    {% if comment.profile_pic %}
+                                    <img src="{{ comment.profile_pic }}" class="comment-avatar">
+                                    {% else %}
+                                    <img src="https://ui-avatars.com/api/?name={{ comment.username }}&background=ff2b56&color=fff" class="comment-avatar">
+                                    {% endif %}
+                                    <b>{{ comment.username }}</b> {{ comment.content }}
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div class="comment-input-group">
+                                <input type="text" class="comment-input" placeholder="Add a comment..." id="input-{{ post.id }}">
+                                <button class="comment-submit" onclick="submitComment({{ post.id }})">Post</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="sidebar">
+            <div class="trending-card">
+                <h2 style="text-transform: lowercase;">Trending Now</h2>
+                {% for t in trending %}
+                <a href="#" class="trending-item">
+                    <img src="{{ t.image_url }}" class="trending-thumb">
+                        <div class="trending-info">
+                            <b>{{ t.title }}</b>
+                            <span>by {{ t.username }} <span style="color: #ff2b56;">{{ t.likes }}</span> likes</span>
+                        </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentSort = urlParams.get('sort') || 'newest';
+        const isShuffle = urlParams.get('shuffle') === 'true';
+        
+        document.querySelectorAll('.sort-btn').forEach(btn => {
+            btn.classList.remove('active');
+            const href = btn.getAttribute('href');
+            if (isShuffle && href.includes('shuffle=true')) {
+                btn.classList.add('active');
+            } else if (!isShuffle && href.includes(`sort=${currentSort}`)) {
+                btn.classList.add('active');
+            }
+        });
+
+        async function likePost(event, postId, btn) {
+            event.preventDefault();
+            try {
+                const response = await fetch(`/like/${postId}`, {
+                    headers: { 'X-Requested-With': 'XMLHttpRequest' }
+                });
+                if (response.ok) {
+                    const data = await response.json();
+                    btn.querySelector('.like-count').textContent = data.likes;
+                    btn.classList.toggle('liked');
+                }
+            } catch (err) {
+                console.error('Error liking post:', err);
+            }
+        }
+
+        function toggleComments(postId) {
+            const section = document.getElementById(`comments-${postId}`);
+            section.style.display = section.style.display === 'block' ? 'none' : 'block';
+        }
+
+        async function submitComment(postId) {
+            const input = document.getElementById(`input-${postId}`);
+            const content = input.value.trim();
+            if (!content) return;
+
+            try {
+                const response = await fetch(`/comment/${postId}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ content: content })
+                });
+                const comment = await response.json();
+                
+                // Get user data for avatar (simplified for now, use ui-avatars as fallback)
+                const avatarUrl = comment.profile_pic || `https://ui-avatars.com/api/?name=${comment.username}&background=ff2b56&color=fff`;
+
+                const list = document.querySelector(`#comments-${postId} .comment-list`);
+                const div = document.createElement('div');
+                div.className = 'comment-item';
+                div.innerHTML = `<img src="${avatarUrl}" class="comment-avatar">
+                                 <b>${comment.username}</b> ${comment.content}`;
+                list.appendChild(div);
+                
+                input.value = '';
+                
+                // Update count
+                const countSpan = document.querySelector(`button[onclick="toggleComments(${postId})"] .comment-count`);
+                countSpan.textContent = parseInt(countSpan.textContent) + 1;
+                
+                // Scroll to bottom of comments
+                list.scrollTop = list.scrollHeight;
+            } catch (err) {
+                console.error('Error posting comment:', err);
+            }
+        }
+    </script>
+    <!-- Bottom Navigation Bar -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tiktok_style.css') }}">
+    <div class="bottom-nav">
+        <a href="/feed" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Home</span>
+        </a>
+        <a href="/explore" class="nav-item">
+            <i class="fa-solid fa-compass"></i>
+            <span>Explore</span>
+        </a>
+        <a href="/search" class="nav-item">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <span>Search</span>
+        </a>
+        <a href="/forums" class="nav-item">
+            <i class="fa-solid fa-comments"></i>
+            <span>Community</span>
+        </a>
+        <a href="/upload" class="nav-item">
+            <div class="nav-create-btn">
+                <i class="fa-solid fa-plus"></i>
+            </div>
+        </a>
+        <a href="/profile/{{ user }}" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Profile</span>
+        </a>
+    </div>
+</body>
+</html>

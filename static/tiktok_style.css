@@ -1,0 +1,255 @@
+/* TikTok Style UI/UX for Artmash */
+
+@font-face {
+    font-family: "Vipnagorgialla";
+    src: url("/static/assets/fonts/vipnagorgialla/Vipnagorgialla Rg.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "MTV Lowercase 1";
+    src: url("/static/assets/fonts/mtv-lowercase-1-regular-font/mtv-lowercase-1.ttf") format("truetype");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    font-weight: 300;
+}
+
+body.tiktok-layout {
+    background-color: #ffffff;
+    color: #111111;
+    height: 100vh;
+    overflow: hidden;
+}
+
+/* Bottom Navigation Bar */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background-color: #111111;
+    border-top: 1px solid #222;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2000;
+}
+
+.nav-item {
+    color: #999;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.7rem;
+    gap: 4px;
+    transition: 0.2s;
+}
+
+.nav-item i {
+    font-size: 1.4rem;
+}
+
+.nav-item.active {
+    color: #ff2b56;
+}
+
+.nav-item:hover {
+    color: #fff;
+}
+
+.nav-create-btn {
+    background: #ff2b56;
+    width: 45px;
+    height: 30px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff !important;
+    box-shadow: 0 0 10px rgba(255, 43, 86, 0.3);
+}
+
+.nav-create-btn i {
+    font-size: 1.2rem;
+}
+
+/* Full-screen Vertical Feed */
+.reels-container {
+    height: 100vh;
+    width: 100%;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+}
+
+.reels-container::-webkit-scrollbar {
+    display: none;
+}
+
+.reel-post {
+    height: 100vh;
+    width: 100%;
+    scroll-snap-align: start;
+    position: relative;
+    background-color: #ffffff;
+}
+
+.reel-video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Action Sidebar */
+.reel-actions {
+    position: absolute;
+    right: 15px;
+    bottom: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    z-index: 10;
+}
+
+.action-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.action-btn i {
+    font-size: 1.8rem;
+    text-shadow: none;
+    color: #111;
+}
+
+.action-btn span {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #111;
+}
+
+.action-btn.liked i {
+    color: #ff2b56;
+}
+
+/* Info Section */
+.reel-info {
+    position: absolute;
+    left: 15px;
+    bottom: 80px;
+    width: 80%;
+    z-index: 10;
+}
+
+.reel-user {
+    font-weight: normal;
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #111;
+}
+
+.reel-title {
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    line-height: 1.4;
+    color: #ccc;
+}
+
+.reel-audio {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: #ff2b56;
+}
+
+.reel-audio i {
+    animation: rotate 3s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Comment Overlay (Unified Dark) */
+.comment-overlay {
+    position: fixed;
+    bottom: -100%;
+    left: 0;
+    width: 100%;
+    height: 70vh;
+    background-color: #ffffff;
+    color: #111;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    z-index: 3000;
+    transition: bottom 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    flex-direction: column;
+    border-top: 1px solid #f0f0f0;
+}
+
+.comment-overlay.open {
+    bottom: 0;
+}
+
+.comment-header {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: normal;
+    position: relative;
+    color: #111;
+}
+
+.close-comments {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.close-comments:hover {
+    color: #ff2b56;
+}
+
+.comment-list {
+    flex: 1;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.comment-input-area {
+    padding: 15px;
+    border-top: 1px solid #f0f0f0;
+    display: flex;
+    gap: 10px;
+    background: #ffffff;
+}
+
+.comment-input-area input {
+    flex: 1;
+    padding: 10px 15px;
+    border-radius: 20px;
+    border: 1px solid #f0f0f0;
+    background-color: #f8f9fa;
+    color: #111;
+    outline: none;
+}
+
+.comment-input-area input:focus {
+    border-color: #ff2b56;
+}

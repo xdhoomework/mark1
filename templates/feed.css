@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Vipnagorgialla";
+    src: url("/static/assets/fonts/vipnagorgialla/Vipnagorgialla Rg.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "MTV Lowercase 1";
+    src: url("/static/assets/fonts/mtv-lowercase-1-regular-font/mtv-lowercase-1.ttf") format("truetype");
+}
+
+body,html{
+height:100%;
+width:100%;
+font-family: "MTV Lowercase 1", "Vipnagorgialla", sans-serif;
+font-weight: 300;
+background-color: #ffffff;
+color: #111111;
+}
