@@ -1,0 +1,12 @@
+List of Algorithms to be implemented:
+
+1. Hash-based / linear searching Algorithms
+2. Sorting Algorithms (Merge Sort / Quick Sort)
+3. DFS and Tree Traversal Algorithms
+4. Priority Queue & Binary Heap Scheduling
+5. MRU / Cache Policy Algorithms
+6. Rule-Based Recommendation Algorithm
+7. Tag Filtering Algorithm (Hash Map)
+8. Fisher-Yates Shuffle Algorithm
+9. SHA-256 Hashing
+10. Algorithms on Event Handling and DOM

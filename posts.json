@@ -1,0 +1,180 @@
+[
+    {
+        "id": 2,
+        "username": "Amrita",
+        "title": "logo",
+        "description": "",
+        "image_url": "/uploads/amrita1.jpg",
+        "tags": [],
+        "likes": 6,
+        "comments": [],
+        "timestamp": 1776923623.5186908,
+        "profile_pic": null,
+        "liked": false
+    },
+    {
+        "id": 3,
+        "username": "Amrita",
+        "title": "im",
+        "description": "",
+        "image_url": "/uploads/1000025877.png",
+        "tags": [],
+        "likes": 2,
+        "comments": [
+            {
+                "username": "hereAmryta",
+                "content": "here goood",
+                "timestamp": 1777995481.8387406,
+                "profile_pic": "/uploads/avatar_hereAmryta_ezgif-1a3efc1c9c7936.gif"
+            }
+        ],
+        "timestamp": 1776923770.313321,
+        "profile_pic": null,
+        "liked": true,
+        "liked_by": [
+            "homeework",
+            "hereAmryta"
+        ]
+    },
+    {
+        "id": 4,
+        "username": "Amrita",
+        "title": "Anime",
+        "description": "",
+        "image_url": "/uploads/hq720_1.jpg",
+        "tags": [],
+        "likes": 0,
+        "comments": [],
+        "timestamp": 1776923815.3143766,
+        "profile_pic": null,
+        "liked": false
+    },
+    {
+        "id": 5,
+        "username": "Amrita",
+        "title": "movie",
+        "description": "",
+        "image_url": "/uploads/WhatsApp_Image_2025-05-11_at_19.43.40_df93622f.jpg",
+        "tags": [],
+        "likes": 2,
+        "comments": [],
+        "timestamp": 1776923855.9892807,
+        "profile_pic": null,
+        "liked": false
+    },
+    {
+        "id": 6,
+        "username": "homeework",
+        "title": "lookup",
+        "description": "",
+        "image_url": "/uploads/jpeg",
+        "tags": [],
+        "category": "Digital Art",
+        "license": "Standard",
+        "price": 0.0,
+        "is_mature": false,
+        "likes": 0,
+        "comments": [
+            {
+                "username": "homeework",
+                "content": "fgrgrg",
+                "timestamp": 1777873416.5949962,
+                "profile_pic": "/uploads/avatar_homeework_img.jpg"
+            },
+            {
+                "username": "homeework",
+                "content": "lovely",
+                "timestamp": 1777874795.7333388,
+                "profile_pic": "/uploads/avatar_homeework_img.jpg"
+            }
+        ],
+        "timestamp": 1777538424.9050834,
+        "profile_pic": "/uploads/avatar_homeework_img.jpg",
+        "liked": false,
+        "liked_by": []
+    },
+    {
+        "id": 7,
+        "username": "homeework",
+        "title": "ryomen sukuna",
+        "description": "",
+        "image_url": "/uploads/51226f87350b8a43d18ed647f5403090.jpg",
+        "tags": [],
+        "category": "Digital Art",
+        "license": "Standard",
+        "price": 1450.0,
+        "is_mature": false,
+        "likes": 17,
+        "comments": [],
+        "timestamp": 1777538479.9430363,
+        "profile_pic": "/uploads/avatar_homeework_img.jpg",
+        "liked": false
+    },
+    {
+        "id": 8,
+        "username": "homeework",
+        "title": "autograph",
+        "description": "",
+        "image_url": "/uploads/atg.jpg",
+        "tags": [],
+        "category": "Digital Art",
+        "license": "Standard",
+        "price": 1350.0,
+        "is_mature": false,
+        "likes": 1,
+        "comments": [
+            {
+                "username": "homeework",
+                "content": "heres my autograph comment",
+                "timestamp": 1777836715.3218098,
+                "profile_pic": "/uploads/avatar_homeework_img.jpg"
+            }
+        ],
+        "timestamp": 1777545427.8142507,
+        "profile_pic": "/uploads/avatar_homeework_img.jpg",
+        "liked": false,
+        "liked_by": [
+            "homeework"
+        ]
+    },
+    {
+        "id": 9,
+        "username": "hereAmryta",
+        "title": "manga",
+        "description": "",
+        "image_url": "/uploads/WhatsApp_Image_2025-04-12_at_18.39.27_509cf0ea.jpg",
+        "tags": [],
+        "category": "Digital Art",
+        "license": "Standard",
+        "price": 0.0,
+        "is_mature": true,
+        "likes": 1,
+        "liked_by": [
+            "hereAmryta"
+        ],
+        "comments": [],
+        "timestamp": 1777998539.9669082,
+        "profile_pic": "/uploads/avatar_hereAmryta_ezgif-1a3efc1c9c7936.gif",
+        "liked": true
+    },
+    {
+        "id": 13,
+        "username": "hereAmryta",
+        "title": "here art4",
+        "description": "",
+        "image_url": "/uploads/images.jpeg",
+        "tags": [],
+        "category": "Digital Art",
+        "license": "Standard",
+        "price": 0.0,
+        "is_mature": false,
+        "likes": 1,
+        "liked_by": [
+            "hereAmryta"
+        ],
+        "comments": [],
+        "timestamp": 1778000751.5348325,
+        "profile_pic": "/uploads/avatar_hereAmryta_ezgif-1a3efc1c9c7936.gif",
+        "liked": true
+    }
+]

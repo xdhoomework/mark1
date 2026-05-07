@@ -1,0 +1,20 @@
+[
+    {
+        "id": 1,
+        "username": "Amrita",
+        "category": "Art Showcase",
+        "title": "heere mytest",
+        "content": "here this thread post is to check my community discussion",
+        "timestamp": 1776977590.7572603,
+        "votes": 1,
+        "replies": [
+            {
+                "id": 1,
+                "username": "hereAmryta",
+                "content": "yaah",
+                "timestamp": 1776979181.44275,
+                "votes": 0
+            }
+        ]
+    }
+]

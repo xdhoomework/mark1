@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Artmash</title>
+
+
+
+
+<link rel="stylesheet" href="/static/Homepage.css?v=1.0">
+
+</head>
+
+<body>
+
+
+<header class="main-header">
+    <div class="header-container">
+        
+          
+        
+        <div class="logo">ARTMASH</div>
+        <nav class="nav-menu">
+            <a href="#hero">Home</a>
+            <a href="#features">Features</a>
+            <a href="#showcase">Showcase</a>
+            <a href="#about">About</a>
+        </nav>
+        <div class="auth-btns">
+            <button class="login-trigger" onclick="openLogin()">log in</button>
+            <button class="join-trigger" onclick="openCreate()">join now</button>
+        </div>
+    </div>
+</header>
+
+<main>
+    <!-- HERO SECTION -->
+    <section id="hero" class="hero-section">
+        <div class="hero-bg"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">WHERE ART MEETS <span class="highlight">ACTION</span></h1>
+            <p class="hero-subtitle">The ultimate platform to create, discover, and mash up your favorite media. Join the elite community of digital creators.</p>
+            <div class="hero-cta">
+                <button class="cta-primary" onclick="openCreate()">GET STARTED</button>
+                <button class="cta-secondary" onclick="document.getElementById('features').scrollIntoView({behavior: 'smooth'})">EXPLORE FEATURES</button>
+            </div>
+        </div>
+        <div class="hero-scroll-indicator">
+            <span>SCROLL</span>
+            <div class="line"></div>
+        </div>
+    </section>
+
+    <!-- FEATURES SECTION -->
+    <section id="features" class="features-section">
+        <div class="section-label">01 // FEATURES</div>
+        <h2 class="section-title">ENGINEERED FOR <span class="highlight">CREATIVITY</span></h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">🚀</div>
+                <h3>High-Speed Upload</h3>
+                <p>Share your creations instantly with our optimized global delivery network.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🎨</div>
+                <h3>Infinite Mashups</h3>
+                <p>Combine videos, images, and audio with our built-in creative engine.</p>
+            </div>
+            <div class="feature-card">
+                <div class="icon">🤝</div>
+                <h3>Global Community</h3>
+                <p>Collaborate with artists and creators from all over the world.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- SHOWCASE SECTION -->
+    <section id="showcase" class="showcase-section">
+        <div class="section-label">02 // SHOWCASE</div>
+        <h2 class="section-title">THE <span class="highlight">FEED</span></h2>
+        <div class="showcase-container">
+            <div class="media-strip">
+                <!-- Media items will be simulated with CSS/Images -->
+                <div class="media-item"></div>
+                <div class="media-item"></div>
+                <div class="media-item"></div>
+                <div class="media-item"></div>
+                <div class="media-item"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="about-section">
+        <div class="section-label">03 // ABOUT</div>
+        <div class="about-content">
+            <div class="about-text">
+                <h2>BEYOND THE <span class="highlight">MASHUP</span></h2>
+                <p>Artmash is more than just a platform; it's an ecosystem designed to push the boundaries of digital expression. We believe that every fragment of media is a pixel in a larger masterpiece.</p>
+                <button class="cta-outline" onclick="openCreate()">LEARN MORE</button>
+            </div>
+            <div class="about-image"></div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <h2>READY TO <span class="highlight">ENTER?</span></h2>
+        <p>Join over 10,000 creators and start your journey today.</p>
+        <button class="cta-large" onclick="openCreate()">JOIN ARTMASH</button>
+    </section>
+</main>
+
+<footer class="main-footer">
+    <div class="footer-top">
+        <div class="footer-brand">
+            <div class="logo">ARTMASH</div>
+            <p>The future of digital art and media collaboration.</p>
+        </div>
+        <div class="footer-links-grid">
+            <div class="link-col">
+                <h4>PLATFORM</h4>
+                <a href="#">Games</a>
+                <a href="#">Explore</a>
+                <a href="#">Trending</a>
+            </div>
+            <div class="link-col">
+                <h4>LEGAL</h4>
+                <a href="#">Privacy</a>
+                <a href="#">Terms</a>
+                <a href="#">Cookies</a>
+            </div>
+            <div class="link-col">
+                <h4>SOCIAL</h4>
+                <a href="#">Twitter</a>
+                <a href="#">Discord</a>
+                <a href="#">Instagram</a>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <p>© 2024 ARTMASH E-SPORTS ENTERTAINMENT. ALL RIGHTS RESERVED.</p>
+    </div>
+</footer>
+
+
+<!-- LOGIN MODAL -->
+
+<!-- LOGIN MODAL -->
+<div id="loginModal" class="modal">
+    <span class="close" onclick="closeLogin()">×</span>
+    <div class="login-box">
+        <h2>LOG IN</h2>
+        <form id="loginForm" method="POST" action="/login">
+            <input type="text" name="username" placeholder="username" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button type="submit" class="login-btn2">authenticate</button>
+        </form>
+        <div class="orsec">
+            <div id="or-line"></div>
+            <span>OR</span>
+            <div id="or-line"></div>
+        </div>
+        <div class="dontaccount">
+            <p>New to Artmash?</p>
+            <button id="createaccount-button" onclick="openCreate()">create account</button>
+        </div>
+    </div>
+</div>
+
+<div id="createModal" class="modal">
+    <span class="close" onclick="closeCreate()">×</span>
+    <div class="login-box">
+        <h2>JOIN US</h2>
+        <form id="createForm" method="POST" action="/register">
+            <input type="email" name="email" placeholder="email address" required>
+            <input type="text" name="username" placeholder="username" maxlength="75" required>
+            <input type="text" name="fullname" placeholder="full name" required>
+            <input type="password" name="password" placeholder="password" minlength="8" required>
+            <button type="submit" class="login-btn2">join artmash</button>
+        </form>
+        <div class="orsec">
+            <div id="or-line"></div>
+            <span>OR</span>
+            <div id="or-line"></div>
+        </div>
+        <div class="dontaccount">
+            <p>Already a member?</p>
+            <button class="login-btn2" onclick="openLogin()">log in</button>
+        </div>
+    </div>
+</div>
+
+
+<script src="/static/Homepage.js"></script>
+
+</body>
+</html>
