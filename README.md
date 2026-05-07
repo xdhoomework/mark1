@@ -10,5 +10,5 @@ Artmash is a visually immersive web-based hybrid creative social ecosystem desig
 ✔ Immersive Design — Modern responsive interface with cinematic visuals.  
 
 ## 🧠 Academic Implementation (DSA)
-This project serves as an academic prototype demonstrating the practical application of Data Structures and Algorithms (DSA) in a real-world scenario.
+This project serves as an academic prototype demonstrating the practical application of User Interface Design (UID) and Data Structures and Algorithms (DSA) in a real-world scenario.
 
